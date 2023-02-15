@@ -33,12 +33,9 @@ function login()
 end
 
 function auth_login()
-  req = Genie.Requests.request()
-  res = Genie.Response
-  
   try
     user = findone(User, username = params(:username), password = Users.hash_password(params(:password)))
-    auth_authenticate(req, user.id)
+    auth_authenticate()
 
     redirect(:success)
   catch ex
