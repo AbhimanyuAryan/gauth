@@ -1,6 +1,8 @@
 module AuthenticationController
 
 using Genie, Genie.Renderer, Genie.Renderer.Html
+using Genie.Requests
+using Genie.Responses
 using SearchLight
 using Logging
 
@@ -29,6 +31,22 @@ function login()
     redirect(:show_login)
   end
 end
+
+function auth_login()
+  req = Genie.Requests.request()
+  res = Genie.Response
+  
+  try
+    user = findone(User, username = params(:username), password = Users.hash_password(params(:password)))
+    auth_authenticate(req, user.id)
+
+    redirect(:success)
+  catch ex
+    flash("Authentication failed! ")
+    redirect(:show_login)
+  end
+end
+
 
 function success()
   html(:authentication, :success, context = @__MODULE__)
