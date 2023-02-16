@@ -25,3 +25,4 @@ route("/register", AuthenticationController.register, method = POST, named = :re
 
 
 route("/auth_login", AuthenticationController.auth_login, method = POST, named = :auth_login)
+route("/test_header", AuthenticationController.test_header, method = GET, named = :test_header)

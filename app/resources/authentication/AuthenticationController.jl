@@ -44,6 +44,11 @@ function auth_login()
   end
 end
 
+function test_header()
+  req = Genie.Requests.request()
+  @info req
+  @show req["Authorization"]
+end
 
 function success()
   html(:authentication, :success, context = @__MODULE__)
